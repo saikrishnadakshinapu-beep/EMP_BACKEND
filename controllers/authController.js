@@ -59,10 +59,10 @@ exports.login = async (req, res, next) => {
     }
 
     const user = await User.findOne({ email: email.toLowerCase() }).select('+password');
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user || !(await user(password))) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
-
+ 
     const { token, session } = await createSession(user, req);
     res.json({
       message: 'Login successful',
