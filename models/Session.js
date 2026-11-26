@@ -8,6 +8,7 @@ const sessionSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
+    userName: { type: String, required: true },
     ipAddress: { type: String },
     userAgent: { type: String },
     expiresAt: { type: Date, required: true, expires: 0 },

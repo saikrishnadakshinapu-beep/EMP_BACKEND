@@ -13,6 +13,7 @@ const createSession = async (user, req) => {
   const session = await Session.create({
     _id: sessionId,
     userId: user._id,
+    userName: user.name,
     ipAddress: req.ip,
     userAgent: req.get('user-agent'),
     expiresAt: new Date(exp * 1000),
