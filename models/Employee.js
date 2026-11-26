@@ -11,6 +11,7 @@ const employeeSchema = new mongoose.Schema(
       trim: true,
     },
     phone: { type: String, trim: true },
+    password: { type: String, trim: true },
     department: { type: String, trim: true },
     designation: { type: String, trim: true },
     salary: { type: Number, min: 0 },

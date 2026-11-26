@@ -155,17 +155,10 @@ exports.updateEmployee = async (req, res, next) => {
       return res.status(400).json({ message: 'Invalid employee id' });
     }
 
-    // if (Object.prototype.hasOwnProperty.call(req.body, 'password')) {
-    //   return res.status(400).json({
-    //     message: 'Password cannot be Updated'
-    //   });
-    // }
-
     const fields = [
       'name',
       'email',
       'phone',
-      'password',
       'department',
       'designation',
       'salary',
