@@ -17,8 +17,7 @@ exports.createEmployee = async (req, res, next) => {
       salary,
       joiningDate
     } = req.body;
-
-    // Validate required fields
+ 
     if (!name || !email || !password) {
       return res.status(400).json({
         success: false,
@@ -32,12 +31,11 @@ exports.createEmployee = async (req, res, next) => {
         message: 'Password must be at least 6 characters'
       });
     }
-
-    // Normalize values
+ 
     const normalizedName = name.trim();
     const normalizedEmail = email.trim().toLowerCase();
 
-    // Check existing user and employee
+    
     const [existingUser, existingEmployee] = await Promise.all([
       User.findOne({ email: normalizedEmail }),
       Employee.findOne({ email: normalizedEmail })
@@ -50,14 +48,13 @@ exports.createEmployee = async (req, res, next) => {
       });
     }
 
-    // Create User account
+   
     createdUser = await User.create({
       name: normalizedName,
       email: normalizedEmail,
       password
     });
-
-    // Create Employee record
+ 
     const employee = await Employee.create({
       name: normalizedName,
       email: normalizedEmail,
@@ -80,8 +77,7 @@ exports.createEmployee = async (req, res, next) => {
     });
 
   } catch (err) {
-
-    // Rollback User if Employee creation fails
+ 
     if (createdUser) {
       try {
         await User.deleteOne({ _id: createdUser._id });
@@ -107,8 +103,7 @@ exports.createEmployee = async (req, res, next) => {
     next(err);
   }
 };
-
-// GET /api/employees?page=1&limit=10&department=IT&search=john
+ 
 exports.getEmployees = async (req, res, next) => {
   try {
     const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
@@ -162,7 +157,7 @@ exports.updateEmployee = async (req, res, next) => {
 
     // if (Object.prototype.hasOwnProperty.call(req.body, 'password')) {
     //   return res.status(400).json({
-    //     message: 'Password cannot be updated through the employee endpoint'
+    //     message: 'Password cannot be Updated'
     //   });
     // }
 
@@ -243,7 +238,7 @@ exports.deleteEmployee = async (req, res, next) => {
   try {
     const { id } = req.body;
     if (!mongoose.isValidObjectId(id)) {
-      return res.status(400).json({ message: 'Invalid employee id' });
+      return res.status(400).json({ message: 'Wrong employee id' });
     }
 
     const employee = await Employee.findById(id);

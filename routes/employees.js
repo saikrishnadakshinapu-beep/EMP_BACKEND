@@ -7,8 +7,7 @@ const {
   updateEmployee,
   deleteEmployee,
 } = require('../controllers/employeeController');
-
-// All employee routes require a valid token in the request headers
+ 
 router.use(auth);
 
 router.post('/', createEmployee);

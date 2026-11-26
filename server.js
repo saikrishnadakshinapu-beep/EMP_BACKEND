@@ -7,7 +7,7 @@ const employeeRoutes = require('./routes/employees');
 
 const app = express();
 app.use(cors());
-// Body parser (JSON + urlencoded)
+ 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,11 +16,9 @@ app.get('/', (req, res) => res.json({ message: 'Employee API is running' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 
-// 404 handler
+ 
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
-
-// Error handler (also catches malformed JSON from the body parser)
-// eslint-disable-next-line no-unused-vars
+ 
 app.use((err, req, res, next) => {
   if (err.type === 'entity.parse.failed') {
     return res.status(400).json({ message: 'Invalid JSON body' });
