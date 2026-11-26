@@ -79,34 +79,15 @@ exports.login = async (req, res, next) => {
   }
 };
 
-exports.getSessions2 = async (req, res, next) => {
-  try {
-    const sessions = await Session.find({
-      userId: req.user._id,
-      revokedAt: null,
-      expiresAt: { $gt: new Date() },
-    })
-      .select('_id ipAddress userAgent createdAt expiresAt')
-      .sort({ createdAt: -1 })
-      .lean();
-
-    res.json({
-      sessions: sessions.map(({ _id, ...session }) => ({ id: _id, ...session })),
-    });
-  } catch (err) {
-    next(err);
-  }
-};
-
 exports.getSessions = async (req, res, next) => {
   try {
     const sessions = await Session.find({
+      
       revokedAt: null,
       expiresAt: { $gt: new Date() },
     })
-      .select('_id userId ipAddress userAgent createdAt expiresAt')
+      .select('_id userId userName ipAddress userAgent createdAt expiresAt')
       .sort({ createdAt: -1 })
-      .limit(25)
       .lean();
 
     res.json({
