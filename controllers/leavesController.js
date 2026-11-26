@@ -3,7 +3,7 @@ const Leaves = require('../models/leaves');
 const emp = require('../models/Employee');
 
 
-exports.insertLeave() = async (req, res) => {
+exports.insertLeave = async (req, res) => {
     try {
         const {
             employeeId,

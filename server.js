@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const employeeRoutes = require('./routes/employees');
+const leaveRoutes = require('./routes/leaves');
 
 const app = express();
 app.use(cors());
@@ -15,7 +16,7 @@ app.get('/', (req, res) => res.json({ message: 'Employee API is running' }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
-
+app.use('/api/leaves', leaveRoutes);
  
 app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
  
