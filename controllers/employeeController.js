@@ -99,7 +99,6 @@ exports.createEmployee = async (req, res, next) => {
         message: err.message
       });
     }
-
     next(err);
   }
 };
