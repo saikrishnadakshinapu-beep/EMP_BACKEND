@@ -159,6 +159,7 @@ exports.updateEmployee = async (req, res, next) => {
       'name',
       'email',
       'phone',
+      'password',
       'department',
       'designation',
       'salary',
