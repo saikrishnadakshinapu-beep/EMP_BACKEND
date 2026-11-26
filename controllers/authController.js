@@ -82,11 +82,9 @@ exports.login = async (req, res, next) => {
 exports.getSessions = async (req, res, next) => {
   try {
     const sessions = await Session.find({
-      
       revokedAt: null,
-      expiresAt: { $gt: new Date() },
-    })
-      .select('_id userId userName ipAddress userAgent createdAt expiresAt')
+      // expiresAt: { $gt: new Date() },
+    }) 
       .sort({ createdAt: -1 })
       .lean();
 
