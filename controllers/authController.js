@@ -82,10 +82,11 @@ exports.login = async (req, res, next) => {
 exports.getSessions = async (req, res, next) => {
   try {
     const sessions = await Session.find({
-      revokedAt: null,
+      // revokedAt: null,
       // expiresAt: { $gt: new Date() },
     }) 
       .sort({ createdAt: -1 })
+      .limit(25)
       .lean();
 
     res.json({
